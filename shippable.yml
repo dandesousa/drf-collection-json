@@ -21,5 +21,7 @@ env:
     - TOXENV=py2.6-django1.4
     - TOXENV=py2.7-django1.3
     - TOXENV=py2.6-django1.3
+before_script:
+    - pip install tox
 script:
     - tox
