@@ -21,7 +21,7 @@ setup(
     url='http://github.com/dandesousa/drf-collection-json',
     license='CC0 1.0 Universal',
     platforms='any',
-    test_suite="tests.test_suite.test_all",
+    test_suite="tests",
     packages=find_packages(exclude=["tests"]),
     package_data={'': ['LICENSE']},
     include_package_data=True,
