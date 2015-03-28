@@ -1,7 +1,6 @@
 language: python
 python:
     - 2.7
-    - 3.2
 build_image: shippableimages/ubuntu1404_python
 env:
     - TOXENV=py34-django17
