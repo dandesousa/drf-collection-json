@@ -1,7 +1,10 @@
 language: python
+
 python:
     - 2.7
+
 build_image: shippableimages/ubuntu1404_python
+
 env:
     - TOXENV=py34-django17
     - TOXENV=py33-django17
@@ -21,7 +24,17 @@ env:
     - TOXENV=py26-django14
     - TOXENV=py27-django13
     - TOXENV=py26-django13
-before_script:
+
+install:
+    - pip install -r requirements.txt
     - pip install tox
+    - pip install coveralls
+    - pip install nose
+
+before_script:
+    - mkdir -p shippable/testresults
+    - mkdir -p shippable/codecoverage
+
 script:
+    - nosetests tests/test_*.py --with-xunit --xunit-file=shippable/testresults/nosetests.xml --with-coverage --cover-package=lapis --cover-xml --cover-xml-file=shippable/codecoverage/coverage.xml --cover-branches
     - tox
