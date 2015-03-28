@@ -3,7 +3,6 @@
 
 
 import tests.conftests
-from collection_json import Collection
 from django.conf.urls import patterns, url
 from django.test import TestCase
 from drf_collection_json.renderers import CollectionJSONRenderer
@@ -41,16 +40,8 @@ class NoSerializerView(APIView):
         return Response()
 
 
-class NoSerializerCjView(APIView):
-    renderer_classes = (CollectionJSONRenderer,)
-
-    def get(self, request):
-        collection = Collection(href="")
-        return Response(collection)
-
 # url patterns for tests
 urlpatterns = patterns(
     '',
     url(r'^noserializer$', NoSerializerView.as_view()),
-    url(r'^noserializer/cj$', NoSerializerCjView.as_view()),
 )
