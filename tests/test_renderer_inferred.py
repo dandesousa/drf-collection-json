@@ -12,7 +12,7 @@ from rest_framework.response import Response
 
 class DictionaryTest(TestCase):
     """tests when the response contains a dictionary"""
-    urls = "tests.test_suite"
+    urls = __name__
 
     def test_no_serializer_view(self):
         with self.assertRaises(TypeError):
@@ -21,15 +21,7 @@ class DictionaryTest(TestCase):
 
 class ListTest(TestCase):
     """tests when the response contains a list"""
-    urls = "tests.test_suite"
-
-
-class CollectionJSONTest(TestCase):
-    """tests when the response contains a collection+json object"""
-    urls = "tests.test_suite"
-
-    def test_no_serializer_view(self):
-        self.client.get("/noserializer/cj")
+    urls = __name__
 
 
 # various views for tests
