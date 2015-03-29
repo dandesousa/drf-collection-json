@@ -8,7 +8,6 @@ from testapp.models import Person
 
 class DictionaryTest(TestCase):
     """tests when the response contains a dictionary"""
-    urls = "testapp.urls"
 
     def test_no_serializer_view(self):
         with self.assertRaises(TypeError):
@@ -16,7 +15,6 @@ class DictionaryTest(TestCase):
 
 
 class PersonTest(TestCase):
-    urls = "testapp.urls"
 
     def setUp(self):
         self.num_people = 10

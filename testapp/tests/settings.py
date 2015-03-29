@@ -6,7 +6,7 @@ DATABASES = {
     }
 }
 
-ROOT_URLCONF='testapp.urls',
+ROOT_URLCONF='testapp.urls'
 
 SITE_ID = 1
 

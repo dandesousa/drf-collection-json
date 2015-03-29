@@ -28,7 +28,6 @@ def reference_collection():
 
 class CollectionJSONTest(TestCase):
     """tests when the response contains a collection+json object"""
-    urls = "testapp.urls"
 
     def test_no_serializer_view(self):
         """tests that the collection json serializer doesn't throw any
