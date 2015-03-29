@@ -77,7 +77,7 @@ class CollectionJSONRenderer(JSONRenderer):
             if not serializer:
                 raise TypeError("Unable to generate a Collection+JSON object")
             request = renderer_context["request"]
-            collection = self._infer_cj(data, serializer,
+            collection = self._infer_cj(data, serializer(),
                                         href=request.build_absolute_uri())
             data = collection.to_dict()
 
