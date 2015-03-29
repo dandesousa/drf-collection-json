@@ -10,7 +10,9 @@ os.environ["DJANGO_SETTINGS_MODULE"] = "testapp.tests.settings"
 
 def main():
     import django
-    django.setup()
+    version = int("".join(map(str, django.VERSION[:2])))
+    if version >= 17:
+        django.setup()
 
     from django.conf import settings
     from django.test.utils import get_runner
