@@ -1,5 +1,6 @@
 # drf-collection-json
 library for supporting the collection-json hypermedia format in django-rest-framework
 
+[![Build Status](https://travis-ci.org/dandesousa/drf-collection-json.svg?branch=master)](https://travis-ci.org/dandesousa/drf-collection-json)
 
-[![Build Status](https://api.shippable.com/projects/550cb8685ab6cc1352a6ae70/badge?branchName=master)](https://app.shippable.com/projects/550cb8685ab6cc1352a6ae70/builds/latest)
+[![Coverage Status](https://coveralls.io/repos/dandesousa/drf-collection-json/badge.svg)](https://coveralls.io/r/dandesousa/drf-collection-json)
