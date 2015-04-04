@@ -5,6 +5,11 @@ from django.test import TestCase
 from collection_json import Collection
 from testapp.models import Person
 
+try:
+    from urlparse import urlparse
+except ImportError:
+    from urllib.parse import urlparse
+
 
 class DictionaryTest(TestCase):
     """tests when the response contains a dictionary"""
@@ -22,7 +27,8 @@ class PersonTest(TestCase):
             p = Person.objects.create(name="person{}".format(i),
                                       address="address{}".format(i))
             p.save()
-        response = self.client.get("/infer/person")
+        self.url = "/infer/person"
+        response = self.client.get(self.url)
         content = response.content.decode("utf-8")
         self.collection = Collection.from_json(content)
 
@@ -45,6 +51,11 @@ class PersonTest(TestCase):
         for i, item in enumerate(self.collection.items):
             expected = "address{}".format(i)
             self.assertEqual(item.address.value, expected)
+
+    def test_collection_identity_link(self):
+        """tests that the href for the collection is correct"""
+        actual = urlparse(self.collection.href).path
+        self.assertEqual(actual, self.url)
 
 
 class ListTest(TestCase):
