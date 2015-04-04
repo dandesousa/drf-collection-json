@@ -3,6 +3,7 @@
 
 
 from collection_json import Collection, Data, Item, Link
+from rest_framework.serializers import HyperlinkedModelSerializer
 from rest_framework.relations import HyperlinkedIdentityField
 from rest_framework.relations import HyperlinkedRelatedField
 from rest_framework.renderers import JSONRenderer
@@ -37,6 +38,14 @@ class CollectionJSONRenderer(JSONRenderer):
         if isinstance(data, dict):
             data = [data]
 
+        def item_href(row):
+            if isinstance(serializer, HyperlinkedModelSerializer):
+                # TODO: should find the url field or IdentityField
+                field = serializer.serializer_url_field
+                return row["url"]
+            else:
+                return None
+
         def item_data(row):
             for field, value in row.items():
                 yield Data(field, value)
@@ -45,7 +54,9 @@ class CollectionJSONRenderer(JSONRenderer):
             for field in link_fields:
                 yield Link(field, row[field])
 
-        items = (Item(data=item_data(row), links=item_links(row)) for row in data)
+        items = (Item(href=item_href(row),
+                      data=item_data(row),
+                      links=item_links(row)) for row in data)
         return Collection(href, items=items)
 
     def render(self, data, media_type=None, renderer_context=None):

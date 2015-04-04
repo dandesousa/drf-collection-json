@@ -27,7 +27,7 @@ class PersonTest(TestCase):
             p = Person.objects.create(name="person{}".format(i),
                                       address="address{}".format(i))
             p.save()
-        self.url = "/infer/person"
+        self.url = "/infer/person/"
         response = self.client.get(self.url)
         content = response.content.decode("utf-8")
         self.collection = Collection.from_json(content)
@@ -56,6 +56,14 @@ class PersonTest(TestCase):
         """tests that the href for the collection is correct"""
         actual = urlparse(self.collection.href).path
         self.assertEqual(actual, self.url)
+
+    def test_collection_item_identity_link(self):
+        """tests that the href for collection item its is correct"""
+        # it should be None, its just a list view, nothing to link against.
+        for i, item in enumerate(self.collection.items):
+            expected = "{}{}/".format(self.url, i+1)
+            actual = urlparse(item.href).path
+            self.assertEqual(actual, expected)
 
 
 class ListTest(TestCase):
