@@ -19,7 +19,8 @@ class PersonTest(TestCase):
     def setUp(self):
         self.num_people = 10
         for i in range(self.num_people):
-            p = Person.objects.create(name="person{}".format(i))
+            p = Person.objects.create(name="person{}".format(i),
+                                      address="address{}".format(i))
             p.save()
         response = self.client.get("/infer/person")
         content = response.content.decode("utf-8")
@@ -34,10 +35,16 @@ class PersonTest(TestCase):
         self.assertEqual(self.num_people, len(self.collection.items))
 
     def test_collection_names(self):
-        """tests that the given attribute was parsed correct"""
+        """tests that the given attribute was parsed correctly"""
         for i, item in enumerate(self.collection.items):
             expected = "person{}".format(i)
             self.assertEqual(item.name.value, expected)
+
+    def test_collection_address(self):
+        """tests that the given attribute was parsed correctly"""
+        for i, item in enumerate(self.collection.items):
+            expected = "address{}".format(i)
+            self.assertEqual(item.address.value, expected)
 
 
 class ListTest(TestCase):
